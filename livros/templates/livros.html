@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="viewport" content="widht=device-width, initial-scale=1.0">
+    <title>Acervos de Livros</title>
+
+    <link rel="stylesheet" href="{% static 'css/livros.css' %}">
+    <p><a href="{% url 'index' %}">Voltar ao Menu Principal</a></p>
+</head>
+<body>
+    <header>
+        <h1>Gerenciamento de Livros</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Cadastrar Novo Livro</h2>
+            <form action="{% url 'livros' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="titulo" placeholder="Título do Livro" required>
+                </div>
+                <div>
+                    <input type="text" name="autor" placeholder="Autor do Livro" required>
+                </div>
+                <div>
+                    <input type="text" name="isbn" placeholder="Isbn" required>
+                </div>
+                <div>
+                    <input type="number" name="ano_publicacao" placeholder="Ano de Publicação" required>
+                </div>
+                <div>
+                    <input type="text" name="titulo" placeholder="Título do Livro" required>
+                </div>
+                <button type="submit">Cadastrar Livro</button>
+            </form>
+        </section>
+    
+        <section>
+            <h2>Acervo de Livros</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>ISBN</th>
+                        <th>Ano de Publicação</th>
+                        <th>Data de Cadastro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for livro in livros %}
+                    <tr>
+                        <td>{{ livro.titulo }}</td>
+                        <td>{{ livro.autor }}</td>
+                        <td>{{ livro.isbn }}</td>
+                        <td>{{ livro.ano_publicacao }}</td>
+                        <td>{{ livro.data_cadastro|date:"d/m/Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">Nenhum livro cadastrado ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

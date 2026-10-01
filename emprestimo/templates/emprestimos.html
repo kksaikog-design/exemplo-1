@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="viewport" content="widht=device-width, initial-scale=1.0">
+    <title>Acervos de Livros</title>
+
+    <link rel="stylesheet" href="{% static 'css/emprestimos.css' %}">
+    <p><a href="{% url 'index' %}">Voltar ao Menu Principal</a></p>
+</head>
+<body>
+    <header>
+        <h1>Novo Empréstimo</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Registrar Empréstimo</h2>
+            <form action="{% url 'emprestimo' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                <label for="livro">Livro:</label>
+                <select name="livro" id="livro" required>
+                    <option value="">Selecione um livro</option>
+                    {% for livro in livros %}
+                        <option value="{{ livro.id }}">{{ livro.titulo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="usuario">Utilizador:</label>
+                <select name="usuario" id="usuario" required>
+                    <option value="">Selecione um utilizador</option>
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+                <button type="submit">Registrar Empréstimo</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+

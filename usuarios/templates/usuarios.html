@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="{% static 'css/usuarios.css' %}">
+    <p><a href="{% url 'index' %}">Voltar ao Menu Principal</a></p>
+</head>
+<body>
+    <header>
+        <h1>Cadastrar Usuário</h1>
+    </header>
+
+    <main>
+        <form action="{% url 'usuarios' %}" method="POST">
+            {% csrf_token %}
+
+            <div>
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+
+            <div>
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" required>
+            </div>
+
+            <button type="submit">Cadastrar Usuário</button>
+        </form>
+    </main>
+</body>
+</html>
